@@ -1,0 +1,140 @@
+successfull execution flow:
+
+1. register provider
+
+2. register consumer
+
+    {
+        "serviceDefinition": "pub1",
+        "providerSystem": {
+        "systemName": "pubsys1",
+        "address": "localhost",
+        "port": 3001
+        },
+        "serviceUri": "temperature",
+        "endOfValidity": "2021-01-09 04:14:13",
+        "secure": "NOT_SECURE",
+        "metadata": {
+        "unit": "celsius"
+        },
+        "version": 1,
+        "interfaces": [
+        "HTTP-INSECURE-JSON"
+        ]
+    }
+
+3. Authorize consumer to publisher: /authorization/mgmt/intracloud
+
+    {
+        "consumerId": 19,
+        "interfaceIds": [
+            2
+        ],
+        "providerIds": [
+            20
+        ],
+        "serviceDefinitionIds": [
+            28
+        ]
+    }
+
+4: Subscribe to an event from consumer /eventhandler/subscribe:
+
+        {
+            "eventType": "pubsub88",
+            "matchMetaData": false,
+            "notifyUri": "notify",
+            "subscriberSystem": {
+                "address": "localhost",
+                "port":3002,
+                "systemName": "subsys1"
+        }
+
+5: Publish an Event from provider /eventhandler/publish:
+
+        {
+            "eventType": "pubsub88",
+            "matchMetaData": false,
+            "notifyUri": "notify",
+            "subscriberSystem": {
+                "address": "localhost",
+                "port":3002,
+                "systemName": "subsys1"
+            }
+        }
+
+
+Additional objects of provider and consumer:
+
+Provider: 
+        {
+            "id": 43,
+            "serviceDefinition": {
+                "id": 28,
+                "serviceDefinition": "pub1",
+                "createdAt": "2020-01-09 22:19:53",
+                "updatedAt": "2020-01-09 22:19:53"
+            },
+            "provider": {
+                "id": 20,
+                "systemName": "pubsys1",
+                "address": "localhost",
+                "port": 3001,
+                "createdAt": "2020-01-09 22:19:53",
+                "updatedAt": "2020-01-09 22:19:53"
+            },
+            "serviceUri": "temperature",
+            "endOfValidity": "2021-01-09 04:14:13",
+            "secure": "NOT_SECURE",
+            "metadata": {
+                "unit": "celsius"
+            },
+            "version": 1,
+            "interfaces": [
+                {
+                    "id": 2,
+                    "interfaceName": "HTTP-INSECURE-JSON",
+                    "createdAt": "2020-01-09 03:26:27",
+                    "updatedAt": "2020-01-09 03:26:27"
+                }
+            ],
+            "createdAt": "2020-01-09 22:19:53",
+            "updatedAt": "2020-01-09 22:19:53"
+        }
+
+Consumer:
+
+        {
+            "id": 42,
+            "serviceDefinition": {
+                "id": 27,
+                "serviceDefinition": "sub1",
+                "createdAt": "2020-01-09 22:18:41",
+                "updatedAt": "2020-01-09 22:18:41"
+            },
+            "provider": {
+                "id": 19,
+                "systemName": "subsys1",
+                "address": "localhost",
+                "port": 3002,
+                "createdAt": "2020-01-09 22:18:41",
+                "updatedAt": "2020-01-09 22:18:41"
+            },
+            "serviceUri": "temperature",
+            "endOfValidity": "2021-01-09 04:14:13",
+            "secure": "NOT_SECURE",
+            "metadata": {
+                "unit": "celsius"
+            },
+            "version": 1,
+            "interfaces": [
+                {
+                    "id": 2,
+                    "interfaceName": "HTTP-INSECURE-JSON",
+                    "createdAt": "2020-01-09 03:26:27",
+                    "updatedAt": "2020-01-09 03:26:27"
+                }
+            ],
+            "createdAt": "2020-01-09 22:18:41",
+            "updatedAt": "2020-01-09 22:18:41"
+        }
